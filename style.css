@@ -516,11 +516,7 @@ body.loaded {
 .netflix-hover h3 {
   font-size: 16px;
 }
-@media (max-width: 768px) {
-  .netflix-hover {
-    display: none;
-  }
-}
+
 
 .no-results {
   display: none;
@@ -684,4 +680,34 @@ body {
 /* Remove extra white space created by elements */
 body * {
   max-width: 100%;
+}
+
+/* MOBILE NAVBAR FIX */
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 15px;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 22px;
+  }
+
+  .hamburger {
+    order: 1; /* hamburger ला logo च्या लगेच नंतर आणते */
+    margin-left: 10px;
+  }
+
+  .search-box {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .profile-container {
+    display: none; /* मोबाइल वर अवांतर जागा टाळण्यासाठी */
+  }
+  
+  .search-input.open {
+    width: 130px;
+  }
 }
