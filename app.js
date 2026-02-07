@@ -1,29 +1,3 @@
-// ================= AUTH PROTECTION ====================
-
-// Check JWT token before loading the page
-const token = localStorage.getItem("token");
-
-if (!token) {
-  // User not logged in -> redirect
-  window.location.href = "login.html";
-} else {
-  // Verify token with backend
-  fetch("http://localhost:5000/api/auth/protected", {
-    headers: { Authorization: token },
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      if (data.message !== "Access granted") {
-        localStorage.removeItem("token");
-        window.location.href = "login.html";
-      }
-    })
-    .catch(() => {
-      localStorage.removeItem("token");
-      window.location.href = "login.html";
-    });
-}
-
 let ORIGINAL_MOVIES = [];
 let ORIGINAL_SERIES = [];
 let ORIGINAL_RANDOM = [];
