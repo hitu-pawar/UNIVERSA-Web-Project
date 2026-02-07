@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+
+    <style>
+        body {
+            background: #000;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        .profile-box {
+            width: 100%;
+            background: rgba(255,255,255,0.06);
+            padding: 30px;
+            border-radius: 14px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            margin-bottom: 40px;
+            box-shadow: 0 0 20px rgba(255,255,255,0.1);
+        }
+
+        .profile-pic {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            border: 3px solid #f5d36b;
+            object-fit: cover;
+        }
+
+        .edit-photo-btn {
+            display: block;
+            margin: 12px auto;
+            font-size: 14px;
+            color: #ff4db8;
+            cursor: pointer;
+        }
+
+        .profile-name {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .email {
+            opacity: 0.8;
+        }
+
+        .edit-section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .edit-section input {
+            width: 80%;
+            padding: 10px;
+            border-radius: 6px;
+            border: none;
+            margin-bottom: 10px;
+            outline: none;
+        }
+
+        .save-btn {
+            background: #ff4db8;
+            padding: 10px 20px;
+            border-radius: 6px;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .stat-box {
+            background: rgba(255,255,255,0.06);
+            width: 200px;
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .stat-number {
+            font-size: 30px;
+            font-weight: bold;
+            color: #ffd86b;
+        }
+
+        .section-title {
+            font-size: 24px;
+            margin: 20px 0 10px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .movie-list {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+        }
+
+        .movie {
+            width: 140px;
+        }
+
+        .movie img {
+            width: 100%;
+            height: 190px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        .account-box {
+            background: rgba(255,255,255,0.06);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 40px;
+        }
+
+        .logout-btn {
+            background: #ff2d55;
+            padding: 10px 25px;
+            border-radius: 6px;
+            border: none;
+            font-size: 16px;
+            color: #fff;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- PROFILE -->
+    <div class="profile-box">
+        <img id="profile-photo" src="img/profile.png" class="profile-pic">
+
+        <label class="edit-photo-btn">
+            Change Photo
+            <input type="file" id="upload-photo" style="display:none;">
+        </label>
+
+        <div class="profile-name" id="username">Hitesh Pawar</div>
+        <div class="email" id="useremail">hitesh@example.com</div>
+
+        <button onclick="toggleEdit()" class="logout-btn" style="background:#5b4dff;">
+            Edit Profile
+        </button>
+
+        <div class="edit-section" id="edit-box">
+            <input type="text" id="edit-name" placeholder="Enter new name">
+            <input type="text" id="edit-email" placeholder="Enter new email">
+            <button class="save-btn" onclick="saveProfile()">Save</button>
+        </div>
+    </div>
+
+
+    <!-- STATS -->
+    <div class="stats">
+        <div class="stat-box">
+            <div class="stat-number" id="movies-watched">0</div>
+            Movies Watched
+        </div>
+
+        <div class="stat-box">
+            <div class="stat-number" id="hours-watched">0</div>
+            Hours Watched
+        </div>
+
+        <div class="stat-box">
+            <div class="stat-number" id="fav-count">0</div>
+            Favorites
+        </div>
+    </div>
+
+
+    <!-- CONTINUE WATCHING -->
+    <div class="section-title">Continue Watching</div>
+    <div class="movie-list" id="continue-list"></div>
+
+    <!-- WATCH HISTORY -->
+    <div class="section-title">Watch History</div>
+    <div class="movie-list" id="history-list"></div>
+
+
+    <!-- ACCOUNT SETTINGS -->
+    <div class="account-box">
+        <h3>Account Settings</h3>
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+    </div>
+
+</div>
+
+<script>
+
+    /* PROFILE EDIT */
+    function toggleEdit() {
+        const box = document.getElementById("edit-box");
+        box.style.display = box.style.display === "block" ? "none" : "block";
+    }
+
+    function saveProfile() {
+        const newName = document.getElementById("edit-name").value;
+        const newEmail = document.getElementById("edit-email").value;
+
+        if (newName) document.getElementById("username").innerHTML = newName;
+        if (newEmail) document.getElementById("useremail").innerHTML = newEmail;
+
+        document.getElementById("edit-box").style.display = "none";
+    }
+
+    /* UPLOAD PROFILE PHOTO */
+    document.getElementById("upload-photo").onchange = function(e){
+        document.getElementById("profile-photo").src = URL.createObjectURL(e.target.files[0]);
+    }
+
+    /* LOGOUT */
+    function logout() {
+        localStorage.removeItem("token");
+        window.location.href = "login.html";
+    }
+
+    /* HISTORY + FAVORITES */
+    const history = JSON.parse(localStorage.getItem("history")) || [];
+    const favs = JSON.parse(localStorage.getItem("favorites")) || [];
+
+    document.getElementById("movies-watched").innerHTML = history.length;
+    document.getElementById("fav-count").innerHTML = favs.length;
+    document.getElementById("hours-watched").innerHTML = history.length * 2;
+
+    const historyList = document.getElementById("history-list");
+    const continueList = document.getElementById("continue-list");
+
+    if (history.length === 0) {
+        historyList.innerHTML = "<p>No Watch History</p>";
+        continueList.innerHTML = "<p>No Continue Watching</p>";
+    }
+
+    /* SHOW HISTORY */
+    history.forEach(movie => {
+        historyList.innerHTML += `
+            <div class="movie">
+                <img src="${movie.poster}">
+            </div>
+        `;
+    });
+
+    /* SHOW CONTINUE WATCHING */
+    history.slice(0, 10).forEach(movie => {
+        continueList.innerHTML += `
+            <div class="movie">
+                <img src="${movie.poster}">
+            </div>
+        `;
+    });
+
+</script>
+
+</body>
+</html>

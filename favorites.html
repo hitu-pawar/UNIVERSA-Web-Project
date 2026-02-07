@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Favorites</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<script>
+  if (localStorage.getItem("loggedIn") !== "true") {
+  window.location.href = "login.html";
+}
+
+</script>
+
+<div class="container">
+    <div class="back-home">
+  <button onclick="goHome()">
+    <i class="fas fa-arrow-left"></i>
+    Back to Home
+  </button>
+</div>
+
+  <div class="content-container">
+
+    <h1 class="movie-list-title" style="margin:20px">
+      ❤️ My Favorites
+    </h1>
+
+    <div class="movie-list-container">
+      <div class="movie-list-wrapper">
+        <div class="movie-list" id="favList"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  const favs = JSON.parse(localStorage.getItem("favorites")) || [];
+  const list = document.getElementById("favList");
+
+  if (favs.length === 0) {
+    list.innerHTML = "<p style='color:white'>No favorites added yet 😢</p>";
+  }
+
+  favs.forEach((m, i) => {
+    const card = document.createElement("div");
+    card.className = "movie-list-item netflix-card";
+
+    card.innerHTML = `
+      <div class="poster-wrapper">
+        <img src="${m.poster}" alt="${m.title}">
+      </div>
+
+      <div class="netflix-hover">
+        <h3>${m.title}</h3>
+        <p>⭐ ${m.rating ?? "N/A"}</p>
+
+        <button class="fav-btn" onclick="removeFav(${i})">
+          ❌ Remove
+        </button>
+      </div>
+    `;
+
+    list.appendChild(card);
+  });
+
+  function removeFav(index) {
+    favs.splice(index, 1);
+    localStorage.setItem("favorites", JSON.stringify(favs));
+    location.reload();
+  }
+</script>
+
+<!-- ⭐ MOST IMPORTANT LINE -->
+<script>
+  window.addEventListener("load", () => {
+    document.body.classList.add("loaded");
+  });
+</script>
+
+<script>
+  function goHome() {
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>
