@@ -709,12 +709,13 @@ body * {
     z-index: 9999;
   }
 
-  .navbar-container {
-    display: grid !important;
-    grid-template-columns: auto 1fr auto !important;
-    align-items: center;
-    width: 100%;
-  }
+ .navbar-container {
+  display: grid !important;
+  grid-template-columns: auto 1fr auto auto !important;
+  align-items: center;
+  width: 100%;
+  column-gap: 10px;
+}
 
   .logo {
     font-size: 22px;
@@ -723,15 +724,15 @@ body * {
     white-space: nowrap;
   }
 
-  .hamburger {
-    display: block;
-    font-size: 32px;
-    padding: 10px 14px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 14px;
-    transition: .25s;
-    justify-self: end;
-  }
+/* HAM ICON */
+.hamburger {
+  display: block;
+  font-size: 30px;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 14px;
+  transition: .25s;
+}
 
   .hamburger:active {
     transform: scale(.85);
@@ -747,12 +748,15 @@ body * {
       SEARCH BAR — NO OVERFLOW EVER
      ---------------------------------------------------------- */
   .search-box {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: 100%;
-    gap: 8px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-search-icon {
+  font-size: 22px;
+  margin-right: 8px;
+}
 
   .search-input {
     width: 0;
@@ -773,9 +777,22 @@ body * {
     box-shadow: 0 0 16px rgba(255,0,0,0.45);
   }
 
-  .profile-container {
-    display: none !important;
-  }
+ /* PROFILE BACK */
+.profile-container {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.profile-picture {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.profile-text-container {
+  display: none !important; /* text ठेवला तर overflow होईल */
+}
 
 
   /* ----------------------------------------------------------
@@ -921,6 +938,56 @@ body * {
 
   body {
     padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* ================================================================
+   📱 FINAL MOBILE MENU (Perfect & Tested)
+   ================================================================ */
+.mobile-menu {
+  position: fixed;
+  top: 64px;               /* Navbar खाली */
+  left: 0;
+  width: 100%;
+  background: rgba(15,15,15,0.95);
+  backdrop-filter: blur(12px);
+  padding: 10px 0;
+  z-index: 99999;
+  display: none;
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: all 0.35s ease;
+}
+
+.mobile-menu.open {
+  display: block;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.mobile-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-menu ul li {
+  padding: 14px 20px;
+  font-size: 18px;
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  transition: 0.25s;
+}
+
+.mobile-menu ul li:active {
+  background: rgba(255,255,255,0.15);
+  transform: scale(0.97);
+}
+
+/* Remove menu from desktop */
+@media (min-width: 769px) {
+  .mobile-menu {
+    display: none !important;
   }
 }
 

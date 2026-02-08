@@ -606,3 +606,11 @@ async function signup() {
     alert("Signup failed");
   }
 }
+
+const hamburger = document.querySelector(".hamburger");
+const mobileMenu = document.getElementById("mobileMenu");
+
+hamburger.addEventListener("click", () => {
+  mobileMenu.classList.toggle("open");
+});
+
