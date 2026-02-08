@@ -696,28 +696,29 @@ body * {
      NAVBAR — PERFECT GRID FIX
      (Logo - Search - Hamburger perfectly aligned)
      ---------------------------------------------------------- */
+    /* NAVBAR */
   .navbar {
-    height: 64px;
-    padding: 0 14px;
+    height: 66px;
+    padding: 0 12px;
     display: flex;
     align-items: center;
-    background: rgba(25,25,25,0.85);
+    background: rgba(25,25,25,0.88);
     backdrop-filter: blur(20px);
+    width: 100%;
     position: fixed;
     top: 0; left: 0;
-    width: 100%;
     z-index: 9999;
   }
 
- .navbar-container {
-  display: grid !important;
-  grid-template-columns: auto 1fr auto auto !important;
-  align-items: center;
-  width: 100%;
-  column-gap: 10px;
-}
+.navbar-container {
+    display: grid !important;
+    grid-template-columns: auto 1fr auto auto !important;
+    align-items: center;
+    width: 100%;
+    column-gap: 14px;
+  }
 
-  .logo {
+   .logo {
     font-size: 22px;
     font-weight: 900;
     letter-spacing: 3px;
@@ -725,14 +726,13 @@ body * {
   }
 
 /* HAM ICON */
-.hamburger {
-  display: block;
-  font-size: 30px;
-  padding: 10px 14px;
-  background: rgba(255,255,255,0.08);
-  border-radius: 14px;
-  transition: .25s;
-}
+ .hamburger {
+    display: block;
+    font-size: 32px;
+    padding: 8px 12px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 14px;
+  }
 
   .hamburger:active {
     transform: scale(.85);
@@ -747,52 +747,95 @@ body * {
   /* ----------------------------------------------------------
       SEARCH BAR — NO OVERFLOW EVER
      ---------------------------------------------------------- */
-  .search-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.navbar-search-icon {
-  font-size: 22px;
-  margin-right: 8px;
-}
-
-  .search-input {
-    width: 0;
-    max-width: 100% !important;
-    opacity: 0;
-    padding: 9px 12px;
-    background: #141414;
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.16);
-    color: white;
-    transition: .35s;
+   .search-box {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
 
-  .search-input.open {
-    width: 100% !important;
-    max-width: 180px !important;
+  .navbar-search-icon {
+    font-size: 22px;
+  }
+
+    .search-input {
+    width: 0px;
+    opacity: 0;
+    padding: 8px 12px;
+    background: #141414;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 14px;
+    margin-left: 6px;
+    color: white;
+    transition: all .35s ease;
+    max-width: 180px;
+  }
+
+    .search-input.open {
+    width: 160px;
     opacity: 1;
     box-shadow: 0 0 16px rgba(255,0,0,0.45);
   }
 
  /* PROFILE BACK */
-.profile-container {
-  display: flex !important;
-  align-items: center;
-  gap: 8px;
-}
+ .profile-container {
+    display: flex !important;
+    align-items: center;
+    position: relative;
+    gap: 6px;
+  }
 
-.profile-picture {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-}
+ .profile-picture {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+  }
 
-.profile-text-container {
-  display: none !important; /* text ठेवला तर overflow होईल */
-}
+ .profile-text-container {
+    display: none !important; /* text काढले पण dropdown चालू ठेवला */
+  }
+
+  .profile-dropdown {
+    position: absolute;
+    top: 48px;
+    right: 0;
+    background: #111;
+    width: 150px;
+    padding: 10px;
+    display: none;
+    border-radius: 10px;
+    z-index: 999999;
+  }
+
+  .profile-dropdown.show {
+    display: block;
+  }
+
+   .toggle {
+    width: 42px;
+    height: 22px;
+    background: #eee;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    padding: 0 4px;
+    position: relative;
+  }
+
+  .toggle-ball {
+    width: 18px;
+    height: 18px;
+    background: #000;
+    border-radius: 50%;
+    position: absolute;
+    left: 2px;
+    transition: .4s;
+  }
+
+  .toggle.active .toggle-ball {
+    transform: translateX(18px);
+    background: #fff;
+  }
+
 
 
   /* ----------------------------------------------------------
@@ -944,40 +987,39 @@ body * {
 /* ================================================================
    📱 FINAL MOBILE MENU (Perfect & Tested)
    ================================================================ */
-.mobile-menu {
-  position: fixed;
-  top: 64px;               /* Navbar खाली */
-  left: 0;
-  width: 100%;
-  background: rgba(15,15,15,0.95);
-  backdrop-filter: blur(12px);
-  padding: 10px 0;
-  z-index: 99999;
-  display: none;
-  transform: translateY(-20px);
-  opacity: 0;
-  transition: all 0.35s ease;
-}
+ /* MOBILE MENU */
+  .mobile-menu {
+    position: fixed;
+    top: 66px;
+    left: 0;
+    width: 100%;
+    background: rgba(10, 10, 10, .96);
+    backdrop-filter: blur(10px);
+    display: none;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all .35s ease;
+    z-index: 99999;
+  }
 
-.mobile-menu.open {
-  display: block;
-  transform: translateY(0);
-  opacity: 1;
-}
+  .mobile-menu.open {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-.mobile-menu ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+  .mobile-menu ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
 
-.mobile-menu ul li {
-  padding: 14px 20px;
-  font-size: 18px;
-  color: #fff;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-  transition: 0.25s;
-}
+  .mobile-menu ul li {
+    padding: 16px 20px;
+    color: white;
+    font-size: 18px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
 
 .mobile-menu ul li:active {
   background: rgba(255,255,255,0.15);

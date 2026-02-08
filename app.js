@@ -607,6 +607,40 @@ async function signup() {
   }
 }
 
+function navigateTo(section) {
+  hideAllSections();
+  hideNoResults();
+  searchInput.value = "";
+
+  switch(section) {
+    case "home":
+      restoreAllSections();
+      break;
+
+    case "movies":
+      showSection("section-movies");
+      break;
+
+    case "series":
+      showSection("section-series");
+      break;
+
+    case "tv":
+      showSection("section-tv");
+      break;
+
+    case "popular":
+    case "trends":
+      showSection("section-random");
+      break;
+  }
+
+  // Close mobile menu after clicking
+  mobileMenu.classList.remove("open");
+}
+
+
+
 const hamburger = document.querySelector(".hamburger");
 const mobileMenu = document.getElementById("mobileMenu");
 
