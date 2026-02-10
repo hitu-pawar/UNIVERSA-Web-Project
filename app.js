@@ -449,6 +449,11 @@ document.querySelectorAll(".menu-list-item").forEach((item) => {
         showSection("section-series");
         break;
 
+      case "tv":
+        showSection("section-tv");
+        scrollToSectionWithOffset("section-tv");
+        break;
+
       case "popular":
       case "trends":
         showSection("section-random");
@@ -579,6 +584,19 @@ function openFavorites() {
   window.location.href = "favorites.html";
 }
 
+function scrollToSectionWithOffset(id) {
+  const element = document.getElementById(id);
+  if (!element) return;
+
+  const navbarHeight = 70; // तुझा navbar 60px आहे, थोडा safe margin
+  const elementPos = element.getBoundingClientRect().top + window.scrollY;
+
+  window.scrollTo({
+    top: elementPos - navbarHeight,
+    behavior: "smooth",
+  });
+}
+
 // FINAL SIGNUP FUNCTION (Node.js + MongoDB)
 async function signup() {
   const email = document.getElementById("email").value;
@@ -590,11 +608,14 @@ async function signup() {
   }
 
   try {
-    const res = await fetch("https://universa-backend.onrender.com/api/auth/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    const res = await fetch(
+      "https://universa-backend.onrender.com/api/auth/signup",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      },
+    );
 
     const data = await res.json();
     alert(data.message);
@@ -612,7 +633,7 @@ function navigateTo(section) {
   hideNoResults();
   searchInput.value = "";
 
-  switch(section) {
+  switch (section) {
     case "home":
       restoreAllSections();
       break;
@@ -627,6 +648,7 @@ function navigateTo(section) {
 
     case "tv":
       showSection("section-tv");
+      scrollToSectionWithOffset("section-tv");
       break;
 
     case "popular":
@@ -639,12 +661,9 @@ function navigateTo(section) {
   mobileMenu.classList.remove("open");
 }
 
-
-
 const hamburger = document.querySelector(".hamburger");
 const mobileMenu = document.getElementById("mobileMenu");
 
 hamburger.addEventListener("click", () => {
   mobileMenu.classList.toggle("open");
 });
-

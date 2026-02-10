@@ -9,9 +9,10 @@
 <body>
 
 <script>
-  if (localStorage.getItem("loggedIn") !== "true") {
+  if (!localStorage.getItem("token")) {
   window.location.href = "login.html";
 }
+
 
 </script>
 
