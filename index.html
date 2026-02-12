@@ -12,13 +12,11 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
     />
-    <title>UNIVERSA </title>
+    <title>UNIVERSA</title>
   </head>
 
-  
-
   <body>
-   <div class="navbar">
+    <div class="navbar">
       <div class="navbar-container">
         <div class="logo">UNIVERSA</div>
 
@@ -26,17 +24,17 @@
 
         <div class="menu-container">
           <ul class="menu-list">
-           <li class="menu-list-item active" data-nav="home">Home</li>
-<li class="menu-list-item" data-nav="movies">Movies</li>
-<li class="menu-list-item" data-nav="series">Series</li>
-<li class="menu-list-item" onclick="goToSerials()" data-nav="tv">Serial</li>
-<li class="menu-list-item" data-nav="popular">Best For You</li>
-
-
+            <li class="menu-list-item active" data-nav="home">Home</li>
+            <li class="menu-list-item" data-nav="movies">Movies</li>
+            <li class="menu-list-item" data-nav="series">Series</li>
+            <li class="menu-list-item" onclick="goToSerials()" data-nav="tv">
+              Serial
+            </li>
+            <li class="menu-list-item" data-nav="popular">Best For You</li>
           </ul>
         </div>
-      
-  <br>
+
+        <br />
         <div class="search-box">
           <i class="fas fa-search navbar-search-icon"></i>
 
@@ -44,34 +42,30 @@
         </div>
 
         <div class="profile-container">
-  <img class="profile-picture" src="./img/profile1.png" alt="Profile" />
+          <img class="profile-picture" src="./img/profile1.png" alt="Profile" />
 
+          <div class="profile-text-container" onclick="toggleProfile()">
+            <span class="profile-text">Profile</span>
+            <i class="fas fa-caret-down"></i>
+          </div>
 
-  <div class="profile-text-container" onclick="toggleProfile()">
-    <span class="profile-text">Profile</span>
-    <i class="fas fa-caret-down"></i>
-  </div>
+          <!-- Dark / Light Toggle -->
+          <div class="toggle">
+            <i class="fas fa-moon toggle-icon"></i>
+            <i class="fas fa-sun toggle-icon"></i>
+            <div class="toggle-ball"></div>
+          </div>
 
-  <!-- Dark / Light Toggle -->
-  <div class="toggle">
-    <i class="fas fa-moon toggle-icon"></i>
-    <i class="fas fa-sun toggle-icon"></i>
-    <div class="toggle-ball"></div>
-  </div>
+          <!-- Dropdown -->
+          <div class="profile-dropdown" id="profileDropdown">
+            <p>My Account</p>
+            <p onclick="window.location.href = 'favorites.html'">Favorites</p>
 
-  <!-- Dropdown -->
-  <div class="profile-dropdown" id="profileDropdown">
-    <p>My Account</p>
-    <p onclick="window.location.href='favorites.html'">Favorites</p>
-
-    <p onclick="logout()">Logout</p>
-  </div>
-</div>
-
+            <p onclick="logout()">Logout</p>
+          </div>
+        </div>
       </div>
     </div>
-
-
 
     <div class="sidebar">
       <i class="left-menu-icon fas fa-search" data-title="Search"></i>
@@ -96,47 +90,20 @@
         <div
           class="featured-content"
           style="
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #151515),
-              url('./img/f-1.jpg');
+            background:
+              linear-gradient(to bottom, rgba(0, 0, 0, 0), #151515),
+              url(&quot;./img/f-1.jpg&quot;);
           "
         >
           <img class="featured-title" src="./img/f-t-1.png" alt="" />
-          <p class="featured-desc">
-            <p>
-Set in the brutal era of the pre-Civil War American South, Django Unchained 
-tells the story of Django, a man who has spent his life in chains with no control over his fate.
-</p>
-
-<p>
-As the two form an uneasy partnership, Django learns the art of tracking
-and hunting dangerous criminals, gaining confidence and strength along the
-way. For the first time, he experiences true freedom and begins to imagine
-a future beyond survival. However, his ultimate goal remains clear — to
-rescue his wife, Broomhilda, who has been sold to the notorious Candyland
-plantation.
-</p>
-
-<p>
-Candyland is ruled by Calvin Candie, a charming yet sadistic plantation
-owner whose cruelty hides behind elegance and power.
-</p>
-
-
-
-
-
-
-
-
-
-          </p>
-            <br>
-         <button class="featured-button"
-        onclick="playMovieTrailer('Django Unchained', 'img/f-1.jpg', '8.5')">
-  WATCH
-</button>
-
-
+          <p class="featured-desc"></p>
+          <br />
+          <button
+            class="featured-button"
+            onclick="playMovieTrailer('Django Unchained', 'img/f-1.jpg', '8.5')"
+          >
+            WATCH
+          </button>
         </div>
         <div class="movie-list-container" id="section-movies">
           <h1 class="movie-list-title">NEW MOVIES</h1>
@@ -155,38 +122,20 @@ owner whose cruelty hides behind elegance and power.
         <div
           class="featured-content"
           style="
-            background: linear-gradient(to bottom, rgba(201, 197, 197, 0), #f9f5f5),
-              url('./img/f-2.jpg');
+            background:
+              linear-gradient(to bottom, rgba(201, 197, 197, 0), #f9f5f5),
+              url(&quot;./img/f-2.jpg&quot;);
           "
         >
           <img class="featured-title" src="./img/f-t-2.png" alt="" />
-          <p>
-Set in a realm where light struggles to survive, Dark World explores a
-mysterious universe ruled by ancient powers and hidden shadows. This world
-exists beyond time, where every choice comes with a cost and darkness
-slowly seeps into the hearts of those who dare to challenge it.
-</p>
 
-<p>
-The story follows a lone warrior bound by fate, drawn into a conflict far
-greater than himself. 
-</p>
-
-
-<p>
-Blending dark fantasy, intense action, and psychological depth, Dark World
-is a gripping tale of survival and sacrifice. The film explores themes of
-power, morality, and the thin line between hero and monster.
-</p>
-
-
-
-          <br>
-          <button class="featured-button"
-        onclick="playMovieTrailer('Dark World', 'img/f-2.jpg', '9.0')">
-  WATCH
-</button>
-
+          <br />
+          <button
+            class="featured-button"
+            onclick="playMovieTrailer('Dark World', 'img/f-2.jpg', '9.0')"
+          >
+            WATCH
+          </button>
         </div>
         <div class="movie-list-container" id="section-tv">
           <h1 class="movie-list-title">TV SERIALS</h1>
@@ -195,7 +144,7 @@ power, morality, and the thin line between hero and monster.
             <i class="fas fa-chevron-right arrow"></i>
           </div>
         </div>
-        <div class="movie-list-container"  id="section-random">
+        <div class="movie-list-container" id="section-random">
           <h1 class="movie-list-title">BEST FOR YOU</h1>
           <div class="movie-list-wrapper">
             <div class="movie-list" id="random"></div>
@@ -207,18 +156,16 @@ power, morality, and the thin line between hero and monster.
     <script src="app.js" defer></script>
 
     <!-- TRAILER MODAL -->
-<div id="trailerModal" class="trailer-modal">
-  <span id="closeTrailer">✖</span>
-  <iframe
-    id="trailerFrame"
-    allow="autoplay; encrypted-media"
-    allowfullscreen>
-  </iframe>
-</div>
+    <div id="trailerModal" class="trailer-modal">
+      <span id="closeTrailer">✖</span>
+      <iframe
+        id="trailerFrame"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+      >
+      </iframe>
+    </div>
 
-  
-<div id="youtubeMessage" class="youtube-message">
-  ▶ Playing on YouTube
-</div>
-</body>
+    <div id="youtubeMessage" class="youtube-message">▶ Playing on YouTube</div>
+  </body>
 </html>
