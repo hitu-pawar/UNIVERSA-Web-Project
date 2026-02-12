@@ -566,6 +566,49 @@ function logout() {
   window.location.href = "login.html";
 }
 
+
+// ========== MOBILE PROFILE DROPDOWN TOGGLE ==========
+
+const profilePicture = document.querySelector('.profile-picture');
+const profileDropdown = document.getElementById('profileDropdown');
+const profileTextContainer = document.querySelector('.profile-text-container');
+
+// Toggle function (works for both desktop text and mobile picture)
+function toggleProfile(e) {
+  if (e) e.stopPropagation();
+  profileDropdown.classList.toggle('show');
+}
+
+// Mobile: Click on profile picture
+if (profilePicture) {
+  profilePicture.addEventListener('click', toggleProfile);
+}
+
+// Desktop: Click on profile text (if exists)
+if (profileTextContainer) {
+  profileTextContainer.addEventListener('click', toggleProfile);
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+  if (!profilePicture.contains(e.target) && 
+      !profileDropdown.contains(e.target) &&
+      (!profileTextContainer || !profileTextContainer.contains(e.target))) {
+    profileDropdown.classList.remove('show');
+  }
+});
+
+// Close dropdown after clicking any option
+profileDropdown.querySelectorAll('p').forEach(option => {
+  option.addEventListener('click', () => {
+    profileDropdown.classList.remove('show');
+  });
+});
+
+// Prevent dropdown from closing when clicking on dropdown itself
+profileDropdown.addEventListener('click', (e) => {
+  e.stopPropagation();
+});
 function addToFavorites(movie) {
   let favs = JSON.parse(localStorage.getItem("favorites")) || [];
 
