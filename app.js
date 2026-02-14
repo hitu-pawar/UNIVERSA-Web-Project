@@ -627,6 +627,116 @@ function openFavorites() {
   window.location.href = "favorites.html";
 }
 
+// ==================== HAMBURGER & SIDEBAR - ROBUST SOLUTION ====================
+// Uses mousedown event to avoid click conflicts
+
+(function() {
+  'use strict';
+  
+  // Wait for DOM to be fully loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  
+  function init() {
+    const hamburger = document.querySelector('.hamburger');
+    const sidebar = document.querySelector('.sidebar');
+    
+    if (!hamburger || !sidebar) {
+      console.warn('Hamburger or Sidebar not found');
+      return;
+    }
+    
+    let isToggling = false;
+    
+    // Use mousedown instead of click (faster and avoids conflicts)
+    hamburger.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      
+      if (isToggling) return;
+      
+      isToggling = true;
+      sidebar.classList.toggle('open');
+      
+      // Haptic feedback
+      if (navigator.vibrate) {
+        navigator.vibrate(50);
+      }
+      
+      // Reset toggle lock after animation
+      setTimeout(function() {
+        isToggling = false;
+      }, 600);
+    });
+    
+    // Also support touch events for mobile
+    hamburger.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      e.stopImmediatePropagation();
+      
+      if (isToggling) return;
+      
+      isToggling = true;
+      sidebar.classList.toggle('open');
+      
+      if (navigator.vibrate) {
+        navigator.vibrate(50);
+      }
+      
+      setTimeout(function() {
+        isToggling = false;
+      }, 600);
+    }, { passive: false });
+    
+    // Close sidebar when clicking outside (with delay)
+    setTimeout(function() {
+      document.addEventListener('click', function(e) {
+        if (isToggling) return;
+        
+        if (sidebar.classList.contains('open')) {
+          const isClickInsideSidebar = sidebar.contains(e.target);
+          const isClickOnHamburger = hamburger.contains(e.target);
+          
+          if (!isClickInsideSidebar && !isClickOnHamburger) {
+            sidebar.classList.remove('open');
+          }
+        }
+      }, true); // Use capture phase
+    }, 1000);
+    
+    // Prevent event bubbling from sidebar
+    sidebar.addEventListener('click', function(e) {
+      e.stopPropagation();
+    });
+    
+    // Close on ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+        sidebar.classList.remove('open');
+      }
+    });
+    
+    // Handle window resize
+    let resizeTimer;
+    window.addEventListener('resize', function() {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function() {
+        if (window.innerWidth > 768 && sidebar.classList.contains('open')) {
+          sidebar.classList.remove('open');
+        }
+      }, 250);
+    });
+    
+    console.log('✅ Hamburger menu initialized successfully');
+  }
+  
+})();
+
 function scrollToSectionWithOffset(id) {
   const element = document.getElementById(id);
   if (!element) return;
